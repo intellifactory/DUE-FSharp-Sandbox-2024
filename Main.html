@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${Title}</title>
+</head>
+<body>
+    <h1 style="color:red;">Hello world!</h1>
+    <h2>Again, hello world!</h2>
+
+    <div ws-replace="Container"></div>
+
+    <div ws-children-template="ContactForm">
+        <label>Name</label>
+        <input ws-var="Name" type="text" />
+        <br />
+        <label>Email</label>
+        <input ws-var="Email" type="text" />
+        <br />
+        <label>Message</label>
+        <textarea ws-var="Message"></textarea>
+        <br />
+
+        <button ws-onclick="OnSend" type="submit">Click me!</button>
+        <div style="border:1px solid #ccc;padding:1em;">
+            <h2>${Response}</h2>
+            <p>${Response}</p>
+        </div>
+    </div>
+    <script ws-replace="scripts"></script>
+</body>
+</html>
