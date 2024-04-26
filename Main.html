@@ -6,6 +6,23 @@
     <title>${Title}</title>
 </head>
 <body>
+    <div ws-template="Calculator">
+        <label>Variable</label>
+        <input ws-var="Variable" type="text" />
+        <br />
+        <label>From</label>
+        <input ws-var="From" type="text" />
+        <br />
+        <label>To</label>
+        <input ws-var="To" type="text" />
+        <br />
+        <label>Formula</label>
+        <input ws-var="Formula" type="text" />
+        <br />
+
+        <button ws-onclick="OnSend" type="submit">Click me!</button>
+        <canvas ws-anchor="Canvas" width="1000" height="400"></canvas>
+    </div>
     <h1 style="color:red;">Hello world!</h1>
     <h2>Again, hello world!</h2>
 

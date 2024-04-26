@@ -2,4 +2,8 @@
 /bin
 /obj
 /wwwroot
-
+/build
+/node_modules
+*.tmp
+/SqlProvider
+websharper.log

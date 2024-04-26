@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "esbuild": "^0.19.9"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.2",
+    "mathjs": "^12.4.2",
+    "plotly.js-dist-min": "^2.32.0",
+    "plotly.js-locales": "^2.32.0"
+  }
+}
