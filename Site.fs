@@ -6,19 +6,7 @@ open WebSharper.UI
 open WebSharper.UI.Templating
 
 type MainTemplate = Template<"main.html", ClientLoad.FromDocument>
-
-[<AutoOpen;JavaScript>]
-module Extensions =
-    type AsyncBuilder with
-        // let!
-        member this.Bind(var: Var<'T>, continuation: 'T -> Async<'U>) : Async<'U> =
-            var.View |> View.GetAsync |> fun res -> async.Bind(res, continuation)
-        member this.Bind(view: View<'T>, continuation: 'T -> Async<'U>) : Async<'U> =
-            view |> View.GetAsync |> fun res -> async.Bind(res, continuation)
-
-    type Var<'T> with
-        member this.GetAsync =
-            this.View |> View.GetAsync
+type SPATemplate = Template<"spa.html", ClientLoad.FromDocument>
 
 type Person =
     {
@@ -29,6 +17,7 @@ type Person =
 
 type EndPoint =
     | [<EndPoint "/">] Home
+    | [<EndPoint "/spa">] SPA
     | [<EndPoint "/calc">] Calculator
     | [<EndPoint "/forms">] Forms
     | [<EndPoint "/charting">] Charting
@@ -77,6 +66,30 @@ module Client =
         else
             MainTemplate.ContactForm()
                 .Doc()
+
+    open WebSharper.UI.Client
+
+    let People =
+        ListModel.FromSeq [
+            "John"
+            "Paul"
+        ]
+
+    let SPA() =
+        let newName = Var.Create ""
+
+        SPATemplate()
+            .ListContainer(
+                People.View.DocSeqCached(fun (name: string) ->
+                    SPATemplate.ListItem().Name(name).Doc()
+                )
+            )
+            .Name(newName)
+            .Add(fun _ ->
+                People.Add(newName.Value)
+                newName.Value <- ""
+            )
+            .Bind()
 
     open Calculator
     open WebSharper.JavaScript
@@ -199,6 +212,8 @@ module Site =
                         .Container(hydrate(Client.HomePage()))
                         .Doc()
                 )
+            | EndPoint.SPA ->
+                Content.PageFromFile("spa.html", Client.SPA)
             | EndPoint.Calculator ->
                 Content.Page([
                     MainTemplate()

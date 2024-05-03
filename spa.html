@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MySPA01</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    <h1>My list of unique people</h1>
+    <ul ws-hole="ListContainer">
+        <li ws-template="ListItem">${Name}</li>
+    </ul>
+    <div>
+        <input ws-var="Name" placeholder="Name" />
+        <button ws-onclick="Add">Add</button>
+        <div>You are about to add: ${Name}</div>
+    </div>
+    <script ws-replace="scripts"></script>
+</body>
+</html>
